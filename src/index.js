@@ -92,7 +92,7 @@ export default {
                 return this.arrList;
             });
 
-        this.browserNames = flatten( this.browserNames);
+        this.browserNames = flatten(this.browserNames);
     },
 
 
@@ -105,36 +105,119 @@ export default {
         await CBTConnector.start({ 'username': process.env['CBT_TUNNELS_USERNAME'], 'authkey': process.env['CBT_TUNNELS_AUTHKEY'] }, async function (err) {
             if (!err) {
 
-                var colon = browserName.indexOf(':');
-
-                if (colon > -1) {
-                    var platform = browserName.substr(colon + 1);
-
-                    browserName = browserName.substr(0, colon);
-                }
-                var at = browserName.indexOf('@');
-
-                if (at > -1) {
-                    var version = browserName.substr(at + 1);
-
-                    browserName = browserName.substr(0, at);
-                }
+                // Would be better to external this list and import it
+                const eslBrowsers = {
+                    'chrome-73-mac12': {
+                        'browserName':      'Chrome',
+                        'version':          '73x64',
+                        'platform':         'Mac OSX 10.12',
+                        'screenResolution': '2560x1600'
+                    },
+                    'chrome-60-win10': {
+                        'browserName':      'Chrome',
+                        'version':          '60x64',
+                        'platform':         'Windows 10',
+                        'screenResolution': '1366x768'
+                    },
+                    'chromeM-63-tablet': {
+                        'browserName':       'Chrome',
+                        'deviceName':        'Nexus 9',
+                        'platformVersion':   '6.0',
+                        'platformName':      'Android',
+                        'deviceOrientation': 'portrait'
+                    },
+                    'chromeM-70-galaxyS8': {
+                        'browserName':       'Chrome',
+                        'deviceName':        'Galaxy S8',
+                        'platformVersion':   '8.0',
+                        'platformName':      'Android',
+                        'deviceOrientation': 'portrait'
+                    },
+                    'chromeM-72-nexus6p': {
+                        'browserName':       'Chrome',
+                        'deviceName':        'Nexus 6P',
+                        'platformVersion':   '6.0',
+                        'platformName':      'Android',
+                        'deviceOrientation': 'portrait'
+                    },
+                    'firefox-54-win8': {
+                        'browserName':      'Firefox',
+                        'version':          '54',
+                        'platform':         'Windows 8',
+                        'screenResolution': '1400x1050'
+                    },
+                    'safari-11-mac13': {
+                        'browserName':      'Safari',
+                        'version':          '11',
+                        'platform':         'Mac OSX 10.13',
+                        'screenResolution': '1366x768'
+                    },
+                    'safari-12-ipad': {
+                        'browserName':       'Safari',
+                        'deviceName':        'iPad 6th Generation Simulator',
+                        'platformVersion':   '12.0',
+                        'platformName':      'iOS',
+                        'deviceOrientation': 'portrait'
+                    },
+                    'edge-16-win10': {
+                        'browserName':      'MicrosoftEdge',
+                        'version':          '16',
+                        'platform':         'Windows 10',
+                        'screenResolution': '2560x1600'
+                    },
+                    'ie-11-win8.1': {
+                        'browserName':      'Internet Explorer',
+                        'version':          '11',
+                        'platform':         'Windows 8.1',
+                        'screenResolution': '1366x768'
+                    },
+                };
 
                 var capabilities;
 
-                if (browserName !== 'Chrome Mobile' && browserName !== 'Mobile Safari') {
-                    capabilities = {
-                        browserName: browserName,
-                        version:     version,
-                        platform:    platform
-                    };
+                // ESL BROWSERS
+                if (eslBrowsers.hasOwnProperty(browserName))
+                    // capabilities is in the eslBrowsers list
+                    capabilities = eslBrowsers[browserName];
+                // Generate capibilities based on the browserName (jsonstrify)
+                else if (browserName.indexOf('json:') > -1) {
+                    // issue with spaces & " that are note passed.. :-(
+                    // maybe would need to base64 the input string & un base here...
+                    capabilities = JSON.parse(
+                        browserName.substr(browserName.indexOf('json:') + 5)
+                    );
                 }
                 else {
-                    capabilities = {
-                        browserName:     browserName,
-                        platformVersion: version,
-                        deviceName:      platform
-                    };
+                    var colon = browserName.indexOf(':');
+
+                    if (colon > -1) {
+                        var platform = browserName.substr(colon + 1);
+
+                        browserName = browserName.substr(0, colon);
+                    }
+                    var at = browserName.indexOf('@');
+
+                    if (at > -1) {
+                        var version = browserName.substr(at + 1);
+
+                        browserName = browserName.substr(0, at);
+                    }
+
+
+                    if (browserName !== 'Chrome Mobile' && browserName !== 'Mobile Safari') {
+                        capabilities = {
+                            browserName: browserName,
+                            version:     version,
+                            platform:    platform
+                        };
+                    }
+                    else {
+                        capabilities = {
+                            browserName:     browserName,
+                            platformVersion: version,
+                            deviceName:      platform
+                        };
+                    }
                 }
 
                 // CrossBrowserTesting-Specific Capabilities
