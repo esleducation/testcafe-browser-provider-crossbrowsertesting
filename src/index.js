@@ -107,16 +107,22 @@ export default {
 
                 // Would be better to external this list and import it
                 const eslBrowsers = {
-                    'chrome-73-mac12': {
+                    'chrome-73-mac14': {
                         'browserName':      'Chrome',
                         'version':          '73x64',
+                        'platform':         'Mac OSX 10.14',
+                        'screenResolution': '2560x1600'
+                    },
+                    'chrome-60-mac12': {
+                        'browserName':      'Chrome',
+                        'version':          '60x64',
                         'platform':         'Mac OSX 10.12',
                         'screenResolution': '2560x1600'
                     },
-                    'chrome-60-win10': {
+                    'chrome-73-win7': {
                         'browserName':      'Chrome',
-                        'version':          '60x64',
-                        'platform':         'Windows 10',
+                        'version':          '73x64',
+                        'platform':         'Windows 7 64-Bit',
                         'screenResolution': '1366x768'
                     },
                     'chromeM-63-tablet': {
@@ -140,11 +146,29 @@ export default {
                         'platformName':      'Android',
                         'deviceOrientation': 'portrait'
                     },
-                    'firefox-54-win8': {
+                    'chromeM-67-galaxyS7': {
+                        'browserName':       'Chrome',
+                        'deviceName':        'Galaxy S7',
+                        'platformVersion':   '7.0',
+                        'platformName':      'Android',
+                        'deviceOrientation': 'portrait'
+                    },
+                    'firefox-58-mac12': {
+                        /* BROKEN
                         'browserName':      'Firefox',
                         'version':          '54',
                         'platform':         'Windows 8',
                         'screenResolution': '1400x1050'
+
+                        'browserName':      'Firefox',
+                        'version':          '54',
+                        'platform':         'Mac OSX 10.11',
+                        'screenResolution': '2560x1600'
+                        */
+                        'browserName':      'Firefox',
+                        'version':          '58',
+                        'platform':         'Mac OSX 10.12',
+                        'screenResolution': '2560x1600'
                     },
                     'safari-11-mac13': {
                         'browserName':      'Safari',
@@ -156,6 +180,14 @@ export default {
                         'browserName':       'Safari',
                         'deviceName':        'iPad 6th Generation Simulator',
                         'platformVersion':   '12.0',
+                        'platformName':      'iOS',
+                        'deviceOrientation': 'portrait'
+
+                    },
+                    'safari-11-iph8': {
+                        'browserName':       'Safari',
+                        'deviceName':        'iPhone 8 Simulator',
+                        'platformVersion':   '11.0',
                         'platformName':      'iOS',
                         'deviceOrientation': 'portrait'
                     },
@@ -188,6 +220,9 @@ export default {
                     );
                 }
                 else {
+                    // pattern:
+                    // desktop: <browserName@version:platform>
+                    // mobile:  <browserName@platefromVersion:deviceName
                     var colon = browserName.indexOf(':');
 
                     if (colon > -1) {
@@ -202,7 +237,6 @@ export default {
 
                         browserName = browserName.substr(0, at);
                     }
-
 
                     if (browserName !== 'Chrome Mobile' && browserName !== 'Mobile Safari') {
                         capabilities = {
