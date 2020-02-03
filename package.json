@@ -28,9 +28,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "babel-runtime": "^6.11.6",
-    "cbt_tunnels": "^0.9.8",
-    "lodash": "^4.17.4",
+    "babel-runtime": "^6.26.0",
+    "cbt_tunnels": "^1.2.2",
+    "lodash": "^4.17.15",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "wd": "^1.11.1"
