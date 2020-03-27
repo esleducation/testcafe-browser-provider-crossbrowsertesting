@@ -125,27 +125,27 @@ export default {
                         'platform':         'Windows 7 64-Bit',
                         'screenResolution': '1366x768'
                     },
-                    'chromeM-63-tablet': {
-                        'browserName':       'Chrome',
-                        'deviceName':        'Nexus 9',
-                        'platformVersion':   '6.0',
-                        'platformName':      'Android',
-                        'deviceOrientation': 'portrait'
-                    },
-                    'chromeM-70-galaxyS8': {
-                        'browserName':       'Chrome',
-                        'deviceName':        'Galaxy S8',
-                        'platformVersion':   '8.0',
-                        'platformName':      'Android',
-                        'deviceOrientation': 'portrait'
-                    },
-                    'chromeM-72-nexus6p': {
-                        'browserName':       'Chrome',
-                        'deviceName':        'Nexus 6P',
-                        'platformVersion':   '6.0',
-                        'platformName':      'Android',
-                        'deviceOrientation': 'portrait'
-                    },
+                    // 'chromeM-63-tablet': {
+                    //     'browserName':       'Chrome',
+                    //     'deviceName':        'Nexus 9',
+                    //     'platformVersion':   '6.0',
+                    //     'platformName':      'Android',
+                    //     'deviceOrientation': 'portrait'
+                    // },
+                    // 'chromeM-70-galaxyS8': {
+                    //     'browserName':       'Chrome',
+                    //     'deviceName':        'Galaxy S8',
+                    //     'platformVersion':   '8.0',
+                    //     'platformName':      'Android',
+                    //     'deviceOrientation': 'portrait'
+                    // },
+                    // 'chromeM-72-nexus6p': {
+                    //     'browserName':       'Chrome',
+                    //     'deviceName':        'Nexus 6P',
+                    //     'platformVersion':   '6.0',
+                    //     'platformName':      'Android',
+                    //     'deviceOrientation': 'portrait'
+                    // },
                     'chromeM-67-galaxyS7': {
                         'browserName':       'Chrome',
                         'deviceName':        'Galaxy S7',
